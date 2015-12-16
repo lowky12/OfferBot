@@ -60,3 +60,6 @@ target/
 
 #Sqlite DB
 *.db
+
+#Config Files
+config.ini

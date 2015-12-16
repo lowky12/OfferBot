@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 """
-OfferBot Tests
+Offer Manager Tests
 """
 from nose.tools import *
 import OfferBot

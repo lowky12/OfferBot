@@ -1,0 +1,13 @@
+[oauth]
+reddit_app_key: 'APP KEY'
+reddit_app_secret: 'APP SECRET'
+
+[offer]
+trigger = "!offer"
+post_format = ""
+
+[reputation]
+TrustedLevel: 50
+NeutralLevel: 20
+UntrustedLevel: 0
+ScammerLevel: -10
