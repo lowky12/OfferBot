@@ -1,3 +1,6 @@
+"""
+Setup for OfferBot
+"""
 try:
     from setuptools import setup
 except ImportError:
@@ -11,9 +14,10 @@ config = {
     'author_email': 'lowky12@lowky12.com',
     'url': 'lowky12.com',
     'download_url': 'https://github.com/lowky12/OfferBot',
-    'install_requires': ['praw', 'prawoauth2', 'nose'],
+    'requires': ['praw', 'prawoauth2', 'nose'],
     'packages': ['OfferBot'],
-    'scripts': []
+    'scripts': [],
+    'test_suite': 'nose.collector'
 }
 
 setup(**config)

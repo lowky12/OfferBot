@@ -4,10 +4,7 @@ Bot Setup
 """
 from prawoauth2 import PrawOAuth2Server
 
-from OfferBot import USER_AGENT, REDDIT_CLIENT, get_config
-
-
-SCOPES = []
+from OfferBot import USER_AGENT, REDDIT_CLIENT, SCOPES, get_config
 
 
 def setup_bot():
@@ -19,6 +16,7 @@ def setup_bot():
     app_key = config.get("oauth", "reddit_app_key")
     app_secret = config.get("oauth", "reddit_app_secret")
 
+    print "Getting OAUTH tokens."
     oauth_server = PrawOAuth2Server(REDDIT_CLIENT, app_key, app_secret, state=USER_AGENT, scopes=SCOPES)
     oauth_server.start()
 
@@ -26,10 +24,12 @@ def setup_bot():
     config.set("oauth", "reddit_refresh_token", tokens['refresh_token'])
     config.set("oauth", "reddit_access_token", tokens['access_token'])
 
-    cfgfile = open("../config.ini", 'w')
+    cfgfile = open("config.ini", 'w')
     config.write(cfgfile)
     cfgfile.close()
 
+
 # Main Function
 if __name__ == '__main__':
-    pass
+    print 'Setting up OfferBot'
+    setup_bot()

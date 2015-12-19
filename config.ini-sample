@@ -1,13 +1,23 @@
+[config]
+subreddit = "test"
+max_posts = 100
+bot_footer = "\n--------------------------------------------\nI'm a bot!"
+
 [oauth]
-reddit_app_key: 'APP KEY'
-reddit_app_secret: 'APP SECRET'
+reddit_app_key : "APP_KEY"
+reddit_app_secret : "APP_SECRET"
 
 [offer]
 trigger = "!offer"
-post_format = ""
+reply = "User: $username Rep: ${rep}(${repno}) Jobs:${jobs}"
+accept_reply = "$username has accepted ${username2}\'s job"
+completed_reply = "$username has compleated ${username2}\'s job"
+plus_rep_reply = "$username2 gave $username rep now ${rep}(${repno})"
+minus_rep_reply = "$username2 removed $username rep now ${rep}(${repno})\nDue to ${reason}"
+scammer_rep_reply = "Warning! $username have very low reputaion accept the offer cautiously"
 
 [reputation]
-TrustedLevel: 50
-NeutralLevel: 20
-UntrustedLevel: 0
-ScammerLevel: -10
+TrustedLevel : 50
+NeutralLevel : 20
+UntrustedLevel : 0
+ScammerLevel : -10

@@ -4,41 +4,45 @@ Database Manager Tests
 """
 from nose.tools import *
 import os
-import os.path
 from OfferBot import DBManager
 
 
-def setup_module(module):
-    if os.path.exists('offerbot.db'):
-        os.rename('offerbot.db', 'offerbot.db.bak')
-
+def test_dbmanager_init_tables():
+    """
+    Tests the creation of the sqlite tables
+    """
     DBManager.init_tables()
-
-
-def teardown_module(module):
-    if os.path.exists('offerbot.db'):
-        os.remove('offerbot.db')
-
-    if os.path.exists('offerbot.db.bak'):
-        os.rename('offerbot.db.bak', 'offerbot.db')
+    assert os.path.exists('offerbot.db')
 
 
 def test_dbmanager_oldposts():
+    """
+    Tests the oldpost section of the database
+    """
     test_id = "0"
 
+    if DBManager.is_oldpost(test_id):
+        DBManager.del_oldpost(test_id)
+
     DBManager.add_oldpost(test_id)
-    assert DBManager.is_oldpost(test_id) is True
+    assert DBManager.is_oldpost(test_id)
 
     DBManager.del_oldpost(test_id)
     assert DBManager.is_oldpost(test_id) is False
 
 
 def test_dbmanager_users():
+    """
+    Tests the user section of the database
+    """
     test_user = {
         'username': 'test_user',
         'jobs': 0,
         'reputation': 10
     }
+
+    if DBManager.is_user(test_user['username']):
+        DBManager.del_user(test_user['username'])
 
     DBManager.add_user(test_user['username'], test_user['jobs'], test_user['reputation'])
     assert DBManager.is_user(test_user['username'])
@@ -46,6 +50,9 @@ def test_dbmanager_users():
     get_test_user = DBManager.get_user(test_user['username'])
     assert get_test_user['reputation'] == test_user['reputation']
 
-    DBManager.update_user(test_user['username'], test_user['jobs'], 20)
+    DBManager.update_user(test_user['username'], 20, test_user['reputation'])
     get_test_user = DBManager.get_user(test_user['username'])
-    assert get_test_user['reputation'] == 20
+    assert get_test_user['jobs'] == 20
+
+    DBManager.del_user(test_user['username'])
+    assert DBManager.is_user(test_user['username']) is False
